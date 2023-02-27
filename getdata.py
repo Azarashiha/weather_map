@@ -59,7 +59,7 @@ if response.status_code == 200:
 
                     # 正規表現に一致する部分を抽出してリストに変換
                     match = re.search(pattern, centerpoint)
-                    result = [float(match.group(1)), float(match.group(2))]
+                    result = [float(match.group(2)), float(match.group(1))]
 
                     direction=main.find("jmx_eb:Direction")
                     direction=direction.text
@@ -90,6 +90,7 @@ if response.status_code == 200:
                     }
                     #print(point)
                     out.append(point)
+        out={"type": "FeatureCollection","features":out}
         #print(out)
         with open('data/output.json', 'w', encoding='utf-8') as f:
             json.dump(out, f, ensure_ascii=False)
